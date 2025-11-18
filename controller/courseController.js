@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const Student = require("../Models/Student");
+const User = require("../Models/User");
 const Course = require("../Models/Course");
 
 exports.addCourse = async (req, res) => {
@@ -11,7 +11,7 @@ exports.addCourse = async (req, res) => {
 
   const decoded = jwt.decode(token, process.env.JWT_SECRET);
   const id = decoded.id;
-  const userToFind = await Student.findById(id);
+  const userToFind = await User.findById(id);
 
   if (!userToFind.isAdmin) {
     return res.send("User is not admin");
@@ -34,7 +34,7 @@ exports.removeCourse = async (req, res) => {
 
   const decoded = jwt.decode(token, process.env.JWT_SECRET);
   const userId = decoded.id;
-  const userToFind = await Student.findById(userId);
+  const userToFind = await User.findById(userId);
   const adminName = userToFind.name;
   if (!userToFind.isAdmin) {
     return res.send("User is not admin");

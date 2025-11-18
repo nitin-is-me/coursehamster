@@ -22,8 +22,8 @@ const userSchema=new mongoose.Schema({
     default:false
   }
 })
-const Student=mongoose.model('Student',userSchema);
-module.exports=Student;
+const User=mongoose.model('User',userSchema);
+module.exports=User;
 
  
 // now here abe default false kar, be default it should not create admin account now come in authcontroller

@@ -1,13 +1,12 @@
 // const express=require('express');
-const Student = require("../Models/Student");
+const User = require("../Models/User");
 const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-// student
 exports.signup = async (req, res) => {
   const { name, email, password, isAdmin } = req.body;
   const hashedPassword = bcryptjs.hashSync(password, 10);
-  const userToSave = new Student({
+  const userToSave = new User({
     name,
     email,
     password: hashedPassword,
@@ -19,7 +18,7 @@ exports.signup = async (req, res) => {
 
 exports.login = async (req, res) => {
   const { email, password } = req.body;
-  const userToFind = await Student.findOne({ email: email });
+  const userToFind = await User.findOne({ email: email });
   if (!userToFind) {
     return res.send("User not found");
   }
@@ -44,7 +43,7 @@ exports.login = async (req, res) => {
 };
 
 exports.getUsers = async (req, res) => {
-  const usersToFind = await Student.find();
+  const usersToFind = await User.find();
   res.send(usersToFind);
 };
 
